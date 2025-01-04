@@ -1,0 +1,97 @@
+.player-controls {
+  position: fixed;
+  bottom: 0;
+  left: 16rem;
+  right: 0;
+  height: 5rem;
+  background-color: #18181b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  color: #d4d4d8;
+  z-index: 20;
+}
+
+.song-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.song-cover {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.song-details h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.song-details p {
+  font-size: 0.875rem;
+  color: #fefefe;
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.control-button {
+  background: none;
+  border: none;
+  color: #d4d4d8;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.control-button:hover {
+  color: #f85240;
+}
+
+.play-pause {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: #f85240;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-pause:hover {
+  background-color: #e74c3c;
+}
+
+@media (max-width: 1024px) {
+  .player-controls {
+    left: 12rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .player-controls {
+    left: 10rem;
+    padding: 0 1rem;
+  }
+
+  .volume-control {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .player-controls {
+    left: 8rem;
+  }
+
+  .song-info {
+    display: none;
+  }
+}

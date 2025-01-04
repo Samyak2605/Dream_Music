@@ -1,0 +1,94 @@
+.sidebar {
+  position: fixed; /* Ensure it's positioned relative to the viewport */
+  top: 0;
+  left: 0;
+  width: 16rem; /* 256px */
+  height: 100vh;
+  background-color: #18181b; /* Zinc-900 equivalent */
+  padding: 1rem; /* 16px */
+  display: flex;
+  flex-direction: column;
+  color: #d4d4d8; /* Gray-300 equivalent */
+  z-index: 30; /* Ensure it's higher than Navbar */
+}
+
+.navs-links,
+.footer-links {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* 8px */
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* 12px */
+  padding: 0.5rem 1rem; /* 8px 16px */
+  color: #d4d4d8; /* Gray-300 equivalent */
+  text-decoration: none;
+
+  transition: background-color 0.2s, color 0.2s;
+}
+.nav-item-top {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px; /* 12px */
+  padding: 8px 17px; /* 8px 16px */
+  color: #d4d4d8; /* Gray-300 equivalent */
+  text-decoration: none;
+
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-item:hover {
+  background-color: #27272a; /* Zinc-800 equivalent */
+  color: #ffffff; /* White */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 12rem; /* 192px */
+  }
+
+  .navs-links,
+  .footer-links {
+    margin-top: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 10rem; /* 160px */
+    padding: 0.8rem; /* 12px */
+  }
+
+  .navs-links,
+  .footer-links {
+    margin-top: 50px;
+  }
+
+  .nav-item {
+    font-size: 0.875rem; /* Smaller font size for smaller screens */
+    padding: 0.5rem; /* 8px */
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 8rem; /* 128px */
+    padding: 0.5rem; /* 8px */
+  }
+
+  .navs-links,
+  .footer-links {
+    margin-top: 20px;
+  }
+
+  .nav-item {
+    font-size: 0.75rem; /* Even smaller font size */
+    padding: 0.25rem; /* 4px */
+  }
+}
