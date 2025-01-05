@@ -1,25 +1,3 @@
-// import React from "react";
-// import "./Main.css";
-
-// const Main = () => {
-//   return (
-//     <div>
-//       <div className="Background">
-//         <img src="/Background.png" alt="Background" className="back-image" />
-//         <div className="headings">
-//           <h1>Michael Jackson</h1>
-//         </div>
-//       </div>
-
-//       <div className="second-image">
-//         <img src="/Michael.png" alt="Michael" />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Main;
-
 import React from "react";
 import { BadgeCheck } from "lucide-react";
 import "./Main.css";

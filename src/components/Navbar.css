@@ -1,35 +1,34 @@
 .navbar {
-  position: fixed; /* Fix it to the top */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 4rem; /* 64px */
-  background-color: #780806; /* Gray-900 equivalent */
+  height: 4rem;
+  background-color: #780806;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem; /* 16px */
-  color: #f9fafb; /* Light gray text */
-  z-index: 10; /* Lower than Sidebar */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds shadow */
+  padding: 16px;
+  color: #f9fafb;
+  z-index: 10;
 }
 
 .nav-links {
   display: flex;
-  gap: 2rem; /* Space between links */
+  gap: 2rem;
   margin-left: 400px;
 }
 
 .nav-link {
-  color: #f9fafb; /* Light gray text */
+  color: #f9fafb;
   text-decoration: none;
-  font-size: 1rem; /* 16px */
+  font-size: 16px;
   font-weight: 500;
   transition: color 0.2s;
 }
 
 .nav-link:hover {
-  color: #f85240; /* Light blue on hover */
+  color: #f85240;
 }
 
 .nav-search {
@@ -38,41 +37,41 @@
 }
 
 .search-input {
-  width: 310px; /* Adjust width as needed */
-  height: 2rem; /* 40px */
+  width: 310px;
+  height: 40px;
   border: none;
   border-radius: 35px;
-  padding: 0 1rem; /* Padding inside input */
-  font-size: 1rem; /* 16px */
-  color: white; /* Dark gray text */
-  background-color: brown; /* Light gray background */
+  padding: 0 1rem;
+  font-size: 1rem;
+  color: white;
+  background-color: brown;
   outline: none;
   margin-right: 380px;
   transition: box-shadow 0.2s;
 }
 
 .search-input::placeholder {
-  color: #9ca3af; /* Placeholder text color */
+  color: #9ca3af;
 }
 
 .search-icon {
   position: absolute;
   margin-left: 270px;
-  color: white; /* Icon color */
-  font-size: 1rem; /* Adjust size */
+  color: white;
+  font-size: 1rem;
 }
 
 @media (max-width: 768px) {
   .navbar {
-    height: 3.5rem; /* Smaller height for smaller screens */
+    height: 3.5rem;
     padding: 0 0.8rem;
   }
 
   .nav-links {
-    gap: 1rem; /* Reduce gap between links */
+    gap: 1rem;
   }
 
   .search-input {
-    width: 200px; /* Smaller input width for smaller screens */
+    width: 200px;
   }
 }

@@ -1,5 +1,5 @@
 body {
-  background-color: #780806;
+  background: linear-gradient(to bottom, #780806, black);
 }
 .main-content {
   margin-left: 16rem;
@@ -28,11 +28,7 @@ body {
 .banner-gradient {
   position: absolute;
   inset: 0;
-  /* background: linear-gradient(
-    to right,
-    rgba(120, 8, 6, 0.9),
-    rgba(120, 8, 6, 0.7)
-  ); */
+
   z-index: 2;
   display: flex;
   align-items: flex-end;

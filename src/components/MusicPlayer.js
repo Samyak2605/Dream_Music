@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import React, { useState, useEffect } from "react";
+import { Howl } from "howler";
 import PlayerControls from "./PlayerControls";
 import "./MusicPlayer.css";
 
@@ -8,9 +8,10 @@ const initialTracks = [
     id: "1",
     title: "Billie Jean",
     plays: "1,040,811,084",
-    duration: "4:53",
+    duration: "4:58",
     album: "Thriller 25 Super Deluxe Edition",
-    cover: "/Michael.png",
+    cover: "/mu.png",
+    audioSrc: "/beat_it.mp3",
   },
   {
     id: "2",
@@ -18,7 +19,8 @@ const initialTracks = [
     plays: "643,786,045",
     duration: "4:18",
     album: "Thriller 25 Super Deluxe Edition",
-    cover: "/Michael.png",
+    cover: "/mu.png",
+    audioSrc: "/beat_it.mp3",
   },
   {
     id: "3",
@@ -26,7 +28,8 @@ const initialTracks = [
     plays: "407,234,004",
     duration: "4:17",
     album: "Thriller 25 Super Deluxe Edition",
-    cover: "/Michael.png",
+    cover: "/mu.png",
+    audioSrc: "/Criminal.mp3",
   },
   {
     id: "4",
@@ -34,7 +37,8 @@ const initialTracks = [
     plays: "316,391,952",
     duration: "6:05",
     album: "Bad 25th Anniversary",
-    cover: "/Michael.png",
+    cover: "/mu.png",
+    audioSrc: "/Criminal.mp3",
   },
   {
     id: "5",
@@ -42,103 +46,114 @@ const initialTracks = [
     plays: "268,187,218",
     duration: "3:40",
     album: "Off The Wall",
-    cover: "/Michael.png",
+    cover: "/mu.png",
+    audioSrc: "/rock_with_you.mp3",
   },
 ];
 
 export default function MusicPlayer() {
-  const [tracks, setTracks] = useState(initialTracks);
-  const [currentTrack, setCurrentTrack] = useState(null);
+  const [tracks] = useState(initialTracks);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [currentSong, setCurrentSong] = useState(null);
 
-  const handleDragEnd = (result) => {
-    if (!result.destination) return;
+  useEffect(() => {
+    const sound = new Howl({
+      src: [tracks[currentTrackIndex].audioSrc],
+      html5: true,
+      onend: () => handleNext(),
+    });
+    setCurrentSong(sound);
 
-    const items = Array.from(tracks);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+    return () => {
+      sound.unload();
+    };
+  }, [currentTrackIndex]);
 
-    setTracks(items);
+  const handlePlayPause = () => {
+    if (isPlaying) {
+      currentSong.pause();
+    } else {
+      currentSong.play();
+    }
+    setIsPlaying(!isPlaying);
   };
 
-  const playTrack = (index) => {
-    setCurrentTrack(index);
+  const handleNext = () => {
+    const nextIndex = (currentTrackIndex + 1) % tracks.length;
+    setCurrentTrackIndex(nextIndex);
     setIsPlaying(true);
   };
 
+  const handlePrevious = () => {
+    const previousIndex =
+      (currentTrackIndex - 1 + tracks.length) % tracks.length;
+    setCurrentTrackIndex(previousIndex);
+    setIsPlaying(true);
+  };
+
+  const handleTrackClick = (index) => {
+    if (currentSong) {
+      currentSong.stop();
+    }
+    setCurrentTrackIndex(index);
+    setIsPlaying(true);
+  };
+
+  const renderTracks = () => {
+    return tracks.map((track, index) => {
+      const isActive = currentTrackIndex === index;
+      return (
+        <div
+          key={track.id}
+          className={`track-row ${isActive ? "active" : ""}`}
+          onClick={() => handleTrackClick(index)}
+        >
+          <div className="track-number">{isActive ? "♪" : index + 1}</div>
+          <div className="track-title">
+            <img src={track.cover} alt={track.title} />
+            <span>{track.title}</span>
+          </div>
+          <div className="track-plays">{track.plays}</div>
+          <div className="track-time">{track.duration}</div>
+          <div className="track-album">{track.album}</div>
+        </div>
+      );
+    });
+  };
+
   return (
-    <div className="music-player">
-      <div className="tracks-section">
+    <div className="player-layout">
+      <div className="music-player">
         <div className="tracks-header">
           <h2>Popular</h2>
-          <span className="see-all">See All</span>
+          <button className="see-all">See All</button>
         </div>
 
-        <div className="tracks-table-header">
-          <span className="column-number">#</span>
-          <span className="column-title">TITLE</span>
-          <span className="column-plays">PLAYING</span>
-          <span className="column-duration">TIME</span>
-          <span className="column-album">ALBUM</span>
-        </div>
+        <div className="tracks-table">
+          <div className="tracks-columns">
+            <div className="column-number">#</div>
+            <div className="column-title">TITLE</div>
+            <div className="column-plays">PLAYS</div>
+            <div className="column-time">TIME</div>
+            <div className="column-album">ALBUM</div>
+          </div>
 
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="tracks">
-            {(provided) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className="tracks-list"
-              >
-                {tracks.map((track, index) => (
-                  <Draggable
-                    key={track.id}
-                    draggableId={track.id}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        className={`track-item ${
-                          currentTrack === index ? "active" : ""
-                        }`}
-                        onClick={() => playTrack(index)}
-                      >
-                        <span className="track-number">{index + 1}</span>
-                        <div className="track-title">
-                          <img src={track.cover} alt={track.title} />
-                          <span>{track.title}</span>
-                        </div>
-                        <span className="track-plays">{track.plays}</span>
-                        <span className="track-duration">{track.duration}</span>
-                        <span className="track-album">{track.album}</span>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+          <div className="tracks-list">{renderTracks()}</div>
+        </div>
       </div>
 
       <PlayerControls
         isPlaying={isPlaying}
-        onPlayPause={() => setIsPlaying(!isPlaying)}
-        onNext={() =>
-          currentTrack !== null &&
-          currentTrack < tracks.length - 1 &&
-          playTrack(currentTrack + 1)
-        }
-        onPrevious={() =>
-          currentTrack !== null &&
-          currentTrack > 0 &&
-          playTrack(currentTrack - 1)
-        }
-        currentTrack={currentTrack !== null ? tracks[currentTrack] : null}
+        onPlayPause={handlePlayPause}
+        onNext={handleNext}
+        onPrevious={handlePrevious}
+        currentTrack={{
+          title: tracks[currentTrackIndex].title,
+          artist: "Michael Jackson",
+          cover: tracks[currentTrackIndex].cover,
+          duration: tracks[currentTrackIndex].duration,
+        }}
       />
     </div>
   );

@@ -1,11 +1,13 @@
-.music-player {
+.player-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
   padding: 2rem;
   color: white;
-  position: relative;
 }
 
-.tracks-section {
-  margin-bottom: 5rem;
+.music-player {
+  min-width: 0;
 }
 
 .tracks-header {
@@ -18,11 +20,13 @@
 .tracks-header h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: white;
+  margin: 0;
 }
 
 .see-all {
-  color: #666;
+  color: rgba(255, 255, 255, 0.6);
+  background: none;
+  border: none;
   cursor: pointer;
   transition: color 0.2s;
 }
@@ -31,40 +35,47 @@
   color: white;
 }
 
-.tracks-table-header {
+.tracks-table {
+  width: 100%;
+}
+
+.tracks-columns {
   display: grid;
-  grid-template-columns: 50px 2fr 1fr 100px 1fr;
-  padding: 0.75rem 1rem;
-  color: #f5f1f1;
+  grid-template-columns: 48px 2fr 1fr 100px 1fr;
+  padding: 0.5rem 1rem;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.875rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 0.5rem;
 }
 
 .tracks-list {
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
 }
 
-.track-item {
+.track-row {
   display: grid;
-  grid-template-columns: 50px 2fr 1fr 100px 1fr;
+  grid-template-columns: 48px 2fr 1fr 100px 1fr;
   align-items: center;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
-.track-item:hover {
+.track-row:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.track-item.active {
+.track-row.active {
   background-color: rgba(120, 8, 6, 0.6);
 }
 
 .track-number {
-  color: #666;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
 }
 
 .track-title {
@@ -81,15 +92,20 @@
 }
 
 .track-plays,
-.track-duration,
+.track-time,
 .track-album {
-  color: #666;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
 }
 
-@media (max-width: 1024px) {
-  .tracks-table-header,
-  .track-item {
-    grid-template-columns: 50px 2fr 1fr 100px;
+@media (max-width: 1280px) {
+  .player-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .tracks-columns,
+  .track-row {
+    grid-template-columns: 48px 2fr 1fr 100px;
   }
 
   .column-album,
@@ -99,24 +115,17 @@
 }
 
 @media (max-width: 768px) {
-  .tracks-table-header,
-  .track-item {
-    grid-template-columns: 50px 2fr 100px;
+  .player-layout {
+    padding: 1rem;
+  }
+
+  .tracks-columns,
+  .track-row {
+    grid-template-columns: 48px 2fr 100px;
   }
 
   .column-plays,
   .track-plays {
     display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .music-player {
-    padding: 1rem;
-  }
-
-  .track-title img {
-    width: 32px;
-    height: 32px;
   }
 }
