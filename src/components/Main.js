@@ -9,7 +9,7 @@ const Main = () => {
       <div className="artist-banner">
         <img src="/Background.png" alt="Background" className="back-image" />
         <div className="banner-gradient">
-          <img src="/Michael.png" alt="Michael" className="artist-image" />
+          <img src="/Michael Jackson Thumbnail.png" alt="Michael" className="artist-image" />
           <div className="banner-content">
             <div className="verified-badge">
               <BadgeCheck className="verified-icon" />
