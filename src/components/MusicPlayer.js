@@ -10,7 +10,7 @@ const initialTracks = [
     plays: "1,040,811,084",
     duration: "4:58",
     album: "Thriller 25 Super Deluxe Edition",
-    cover: "/mu.png",
+    cover: "/Mu.png",
     audioSrc: "/beat_it.mp3",
   },
   {
@@ -19,7 +19,7 @@ const initialTracks = [
     plays: "643,786,045",
     duration: "4:18",
     album: "Thriller 25 Super Deluxe Edition",
-    cover: "/mu.png",
+    cover: "/Mu.png",
     audioSrc: "/beat_it.mp3",
   },
   {
@@ -47,7 +47,7 @@ const initialTracks = [
     duration: "3:40",
     album: "Off The Wall",
     cover: "/mu.png",
-    audioSrc: "/rock_with_you.mp3",
+    audioSrc: "/beat_it.mp3",
   },
 ];
 
